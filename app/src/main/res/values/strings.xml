@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">pokemon</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="daftar_akun">Daftar Akun</string>
+    <string name="pokemon_name">Pokemon Name</string>
+    <string name="name">Name</string>
+    <string name="abilities">Abilities</string>
 </resources>
