@@ -24,6 +24,14 @@ class PokemonRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
+    override suspend fun savePokemonList(pokemons: List<Pokemon>) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getCachedPokemonList(): List<Pokemon> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun registerUser(user: User) {
         TODO("Not yet implemented")
     }

@@ -1,4 +1,4 @@
-package com.codeid.pokemon.presentation.auth
+package com.codeid.pokemon.presentation.register
 
 import androidx.lifecycle.ViewModel
 import com.codeid.pokemon.domain.model.User

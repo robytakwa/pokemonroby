@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.codeid.pokemon.databinding.ActivityRegisterBinding
 import com.codeid.pokemon.domain.model.User
-import com.codeid.pokemon.presentation.auth.RegisterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

@@ -12,7 +12,7 @@ import com.codeid.pokemon.R
 import com.codeid.pokemon.domain.model.Pokemon
 import com.codeid.pokemon.presentation.detail.DetailActivity
 
-class PokemonAdapter : RecyclerView.Adapter<PokemonAdapter.PokemonViewHolder>() {
+class HomeAdapter : RecyclerView.Adapter<HomeAdapter.PokemonViewHolder>() {
 
     private val items = mutableListOf<Pokemon>()
 

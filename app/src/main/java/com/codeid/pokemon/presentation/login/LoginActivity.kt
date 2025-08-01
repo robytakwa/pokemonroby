@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.codeid.pokemon.MainActivity
 import com.codeid.pokemon.databinding.ActivityLoginBinding
 import com.codeid.pokemon.domain.model.User
-import com.codeid.pokemon.presentation.auth.LoginViewModel
+import com.codeid.pokemon.presentation.register.RegisterActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -40,7 +40,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.btnRegister.setOnClickListener {
-            // pindah ke RegisterActivity
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
         }
     }
 }
