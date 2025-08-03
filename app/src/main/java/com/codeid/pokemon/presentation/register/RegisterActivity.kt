@@ -2,24 +2,26 @@ package com.codeid.pokemon.presentation.register
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.codeid.pokemon.databinding.ActivityRegisterBinding
 import com.codeid.pokemon.domain.model.User
-import dagger.hilt.android.AndroidEntryPoint
+import com.codeid.pokemon.presentation.common.ViewModelFactory
+import com.codeid.pokemon.presentation.login.LoginViewModel
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
-    private val viewModel: RegisterViewModel by viewModels()
+    private lateinit var viewModel: RegisterViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        viewModel = ViewModelFactory.inject(this).create(RegisterViewModel::class.java)
 
         binding.btnSubmit.setOnClickListener {
             val username = binding.edtUsername.text.toString()

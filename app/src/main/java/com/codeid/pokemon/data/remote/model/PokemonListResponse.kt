@@ -1,28 +1,13 @@
 package com.codeid.pokemon.data.remote.model
 
 data class PokemonListResponse(
+    val count: Int,
+    val next: String?,
+    val previous: String?,
     val results: List<PokemonResult>
 )
 
 data class PokemonResult(
     val name: String,
     val url: String
-)
-
-data class PokemonDetailResponse(
-    val name: String,
-    val abilities: List<PokemonAbility>,
-    val sprites: PokemonSprites
-)
-
-data class PokemonAbility(
-    val ability: AbilityName
-)
-
-data class AbilityName(
-    val name: String
-)
-
-data class PokemonSprites(
-    val front_default: String?
 )

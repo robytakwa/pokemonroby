@@ -1,34 +1,37 @@
 package com.codeid.pokemon.presentation.detail
 
-
 import android.os.Bundle
-import android.widget.TextView
-import androidx.activity.viewModels
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.codeid.pokemon.R
-import com.codeid.pokemon.domain.model.Pokemon
-import dagger.hilt.android.AndroidEntryPoint
+import com.codeid.pokemon.databinding.ActivityDetailBinding
+import com.codeid.pokemon.presentation.common.ViewModelFactory
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
-    private val viewModel: DetailViewModel by viewModels()
+    private lateinit var binding: ActivityDetailBinding
+    private lateinit var viewModel: DetailViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val pokemonName = intent.getStringExtra("pokemon_name") ?: return
 
-        val txtName = findViewById<TextView>(R.id.txtDetailName)
-        val txtAbilities = findViewById<TextView>(R.id.txtAbilities)
+        viewModel = ViewModelFactory.inject(this).create(DetailViewModel::class.java)
 
         lifecycleScope.launch {
-            val detail: Pokemon = viewModel.getDetail(pokemonName)
-            txtName.text = detail.name.capitalize()
-            txtAbilities.text = detail.abilities.joinToString("\n") { it.name }
+            try {
+                val pokemon = viewModel.getDetail(pokemonName)
+                binding.txtDetailName.text = pokemon.name
+
+                binding.txtAbilities.text = "Abilities:\n" + pokemon.abilities.joinToString("\n") { it.name }
+
+            } catch (e: Exception) {
+                Toast.makeText(this@DetailActivity, "Failed to load detail", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

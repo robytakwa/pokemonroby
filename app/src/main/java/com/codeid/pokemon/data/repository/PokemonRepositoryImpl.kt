@@ -1,15 +1,15 @@
 package com.codeid.pokemon.data.repository
 
+import com.codeid.pokemon.data.local.AppDatabase
+import com.codeid.pokemon.data.local.UserEntity
 import com.codeid.pokemon.data.remote.PokemonRemoteDataSource
 import com.codeid.pokemon.domain.model.Pokemon
 import com.codeid.pokemon.domain.model.User
 import com.codeid.pokemon.domain.repository.PokemonRepository
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class PokemonRepositoryImpl @Inject constructor(
-    private val remoteDataSource: PokemonRemoteDataSource
+class PokemonRepositoryImpl(
+    private val remoteDataSource: PokemonRemoteDataSource,
+    private val database: AppDatabase
 ) : PokemonRepository {
 
     override suspend fun getPokemonList(limit: Int, offset: Int): List<Pokemon> {
@@ -21,28 +21,28 @@ class PokemonRepositoryImpl @Inject constructor(
     }
 
     override suspend fun searchPokemon(name: String): Pokemon {
-        TODO("Not yet implemented")
+        return remoteDataSource.fetchPokemonDetail(name)
     }
 
     override suspend fun savePokemonList(pokemons: List<Pokemon>) {
-        TODO("Not yet implemented")
     }
 
     override suspend fun getCachedPokemonList(): List<Pokemon> {
-        TODO("Not yet implemented")
+        return emptyList()
     }
 
     override suspend fun registerUser(user: User) {
-        TODO("Not yet implemented")
+        val entity = UserEntity( username = user.username,email = user.email,  password = user.password)
+        database.userDao().insert(user = entity)
     }
 
     override suspend fun loginUser(email: String, password: String): User? {
-        TODO("Not yet implemented")
+        val entity = database.userDao().login(email, password)
+        return entity?.let { User(it.username,it.email, it.password) }
     }
 
     override suspend fun getUserByEmail(email: String): User? {
-        TODO("Not yet implemented")
+        val entity = database.userDao().getUserByEmail(email)
+        return entity?.let { User(it.username, it.email, it.password) }
     }
-
-
 }

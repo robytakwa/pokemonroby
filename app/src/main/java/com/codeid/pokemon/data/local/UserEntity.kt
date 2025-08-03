@@ -2,12 +2,14 @@ package com.codeid.pokemon.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.codeid.pokemon.domain.model.User
 
 @Entity(tableName = "users")
 data class UserEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @PrimaryKey val email: String,
     val username: String,
-    val email: String,
     val password: String
 )
+
+fun UserEntity.toDomain() = User(username, email, password)
+fun User.toEntity() = UserEntity(email = email, username = username, password = password)

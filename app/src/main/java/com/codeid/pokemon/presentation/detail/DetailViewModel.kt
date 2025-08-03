@@ -6,8 +6,7 @@ import com.codeid.pokemon.domain.usecase.GetPokemonDetailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@HiltViewModel
-class DetailViewModel @Inject constructor(
+class DetailViewModel (
     private val getPokemonDetailUseCase: GetPokemonDetailUseCase
 ) : ViewModel() {
     suspend fun getDetail(name: String): Pokemon {
