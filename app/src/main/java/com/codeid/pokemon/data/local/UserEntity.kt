@@ -11,5 +11,3 @@ data class UserEntity(
     val password: String
 )
 
-fun UserEntity.toDomain() = User(username, email, password)
-fun User.toEntity() = UserEntity(email = email, username = username, password = password)

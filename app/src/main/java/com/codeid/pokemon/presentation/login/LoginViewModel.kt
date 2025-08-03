@@ -11,7 +11,7 @@ class LoginViewModel(private val loginUseCase: LoginUseCase) : ViewModel() {
         val user = loginUseCase(email, password)
         user?.let {
             val sharedPref = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-            sharedPref.edit { putString("name", it.username).putString("email", it.email) }
+            sharedPref.edit { putString("name", it.username).putString("email", it.email).apply() }
         }
         return user
     }

@@ -1,5 +1,6 @@
 package com.codeid.pokemon.presentation.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -21,6 +22,15 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val sharedPref = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val name = sharedPref.getString("name", null)
+        val email = sharedPref.getString("email", null)
+
+        if (!name.isNullOrBlank() && !email.isNullOrBlank()) {
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+            return
+        }
 
         viewModel = ViewModelFactory.inject(this).create(LoginViewModel::class.java)
 

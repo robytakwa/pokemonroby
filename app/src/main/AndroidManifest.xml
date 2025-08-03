@@ -15,7 +15,7 @@
         tools:ignore="Instantiatable">
 
         <activity
-            android:name=".presentation.login.LoginActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -25,6 +25,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".presentation.register.RegisterActivity" />
         <activity android:name=".presentation.detail.DetailActivity" />
+        <activity android:name=".presentation.login.LoginActivity" />
 
     </application>
 
