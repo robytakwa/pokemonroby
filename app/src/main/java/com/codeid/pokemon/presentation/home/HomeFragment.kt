@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codeid.pokemon.databinding.FragmentHomeBinding
 import com.codeid.pokemon.presentation.common.ViewModelFactory
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
@@ -52,24 +53,31 @@ class HomeFragment : Fragment() {
 
                 if (!isLoading && lastVisibleItem >= totalItemCount - 1) {
                     isLoading = true
+                    showLoading(true)
                     lifecycleScope.launch {
                         val newPokemons = viewModel.getPokemons(offset)
                         offset += newPokemons.size
                         adapter.submitList(adapter.currentList + newPokemons)
                         isLoading = false
+                        showLoading(false)
                     }
                 }
             }
         })
 
         lifecycleScope.launch {
+            showLoading(true)
+            delay(1000)
             val pokemons = viewModel.getPokemons(offset)
             offset += pokemons.size
             adapter.submitList(pokemons)
+            showLoading(false)
         }
     }
 
-
+    private fun showLoading(isVisible: Boolean) {
+        binding.progressBar.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
